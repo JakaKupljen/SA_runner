@@ -1,4 +1,5 @@
 import numpy as np
+import cv2 as cv
 from naloga2 import konvolucija
 
 
