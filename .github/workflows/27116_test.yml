@@ -9,11 +9,13 @@ jobs:
   check_tests:
     runs-on: self-hosted
     steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Preveri
         run: |
-          if [ -f konvolucija_test.py ]; then
-            echo "Testne skripte najdene"
-          else
+          if [ ! -f konvolucija_test.py ]; then
             echo "Napaka: Testne skripte ni mogoče najti" > napaka.txt
             exit 1
           fi
