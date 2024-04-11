@@ -37,11 +37,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Prensesi artefakte
+      - name: Prenesi artefakte
         uses: actions/download-artifact@v2
         with:
           name: napaka
-          path: konvolucija_test.py
+          path: artifacts/konvolucija_test.py 
+      
       
       - name: Preveri napake
         run: |
