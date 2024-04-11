@@ -15,7 +15,7 @@ jobs:
 
       - name: Preveri
         run: |
-          if [ ! -f konvoluci_test.py ]; then
+          if [ ! -f konvolucija_test.py ]; then
             echo "Napaka: Testne skripte ni mogoče najti" > napaka.txt
           fi
 
