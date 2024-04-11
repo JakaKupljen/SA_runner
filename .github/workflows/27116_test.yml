@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: napaka
-          path: .
+          path: konvolucija_test.py
 
   run_tests:
     runs-on: self-hosted
@@ -41,7 +41,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: napaka
-          path: .
+          path: artifacts/konvolucija_test.py 
       
       
       - name: Preveri napake
