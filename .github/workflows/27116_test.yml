@@ -9,17 +9,17 @@ jobs:
   check_tests:
     runs-on: self-hosted
     steps:
-      - name: Check if test scripts exist
+      - name: Preveri
         run: |
           if [ ! -f konvolucija_test.py ]; then
-            echo "Test scripts found"
+            echo "Testne skripte najdene"
           else
-            echo "Error: Test scripts not found" > napaka.txt
+            echo "Napaka: Testne skripte ni mogoče najti" > napaka.txt
             exit 1
           fi
         continue-on-error: true
 
-      - name: Upload error artifact
+      - name: Naloži artefakt napake
         if: failure()
         uses: actions/upload-artifact@v2
         with:
@@ -33,24 +33,24 @@ jobs:
       matrix:
         python-version: [3.6.7, 3.7.2]
     steps:
-      - name: Set up Python environment
+      - name: Nastavi Python okolje
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+      - name: Namesti odvisnosti
         run: |
           pip install -r requirements.txt
         working-directory: ${{ github.workspace }}
 
-      - name: Run tests
+      - name: Zaženi teste
         run: |
           pytest konvolucija_test.py
         continue-on-error: true
 
-      - name: Check for errors
+      - name: Preveri napake
         run: |
           if [ -e napaka.txt ]; then
-            echo "Error detected, stopping further processes"
+            echo "Odkrita napaka, prenehanje nadaljnjih procesov"
             exit 1
           fi
