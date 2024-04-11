@@ -24,7 +24,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: error-artifact
+          name: napaka
           path: napaka.txt
 
   run_tests:
@@ -40,7 +40,7 @@ jobs:
       - name: Prensesi artefakte
         uses: actions/download-artifact@v2
         with:
-          name: test-scripts
+          name: napaka
           path: .
       
       - name: Preveri napake
