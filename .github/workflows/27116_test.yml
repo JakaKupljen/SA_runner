@@ -15,7 +15,7 @@ jobs:
 
       - name: Preveri
         run: |
-          if [ ! -f konvolucija_test.py ]; then
+          if [ -f konvolucija_test.py ]; then
             echo "Napaka: Testne skripte ni mogoče najti" > napaka.txt
             exit 1
           fi
@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: napaka
-          path: napaka.txt
+          path: konvolucija_test.py
 
   run_tests:
     runs-on: self-hosted
@@ -41,7 +41,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: napaka
-          path: napaka.txt
+          path: artifacts/konvolucija_test.py 
       
       
       - name: Preveri napake
