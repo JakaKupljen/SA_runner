@@ -11,13 +11,12 @@ jobs:
     steps:
       - name: Preveri
         run: |
-          if [ -f /konvolucija_test.py ]; then
+          if [ -f konvolucija_test.py ]; then
             echo "Testne skripte najdene"
           else
             echo "Napaka: Testne skripte ni mogoče najti" > napaka.txt
             exit 1
           fi
-        continue-on-error: true
 
       - name: Naloži artefakt napake
         if: failure()
