@@ -7,7 +7,7 @@ on:
 
 jobs:
   check_tests:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Check if test scripts exist
         run: |
@@ -27,7 +27,7 @@ jobs:
           path: napaka.txt
 
   run_tests:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: check_tests
     strategy:
       matrix:
