@@ -31,7 +31,7 @@ jobs:
     needs: check_tests
     strategy:
       matrix:
-        python-version: [3.6.7, 3.7.2]
+        python-version: [3.6.7, 3.7.3]
     steps:
       - name: Nastavi Python okolje
         uses: actions/setup-python@v2
