@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check if test scripts exist
         run: |
-          if [ -e tests/konvolucija_test.py ]; then
+          if [ -e konvolucija_test.py ]; then
             echo "Test scripts found"
           else
             echo "Error: Test scripts not found" > napaka.txt
@@ -45,7 +45,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests/konvolucija_test.py
+          pytest konvolucija_test.py
         continue-on-error: true
 
       - name: Check for errors
