@@ -17,7 +17,7 @@ jobs:
             echo "Napaka: Testne skripte ni mogoče najti" > napaka.txt
             exit 1
           fi
-        continue-on-error: true
+        continue-on-error: false
 
       - name: Naloži artefakt napake
         if: failure()
