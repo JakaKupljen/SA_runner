@@ -49,6 +49,7 @@ jobs:
         run: |
           if [ -e napaka.txt ]; then
             echo "Odkrita napaka, prenehanje nadaljnjih procesov"
+            exit 1
           fi
 
       - name: Nastavi Python okolje
