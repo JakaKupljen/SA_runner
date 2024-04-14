@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Set environment variables
-DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
-DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}
-REPONAME=${{ secrets.REPO_NAME }}
+# Pass secrets as arguments or environment variables
+DOCKER_USERNAME=$1
+DOCKER_PASSWORD=$2
+REPO_NAME=$3
 
-# Log in to DockerHub
-docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+# Log in to Docker using Docker login with a token
+echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
-# Build Docker image
-docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME:latest
+# Build Docker image with the appropriate tag
+docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPO_NAME:latest
 
 # Push Docker image to DockerHub
-docker push $DOCKER_USERNAME/$REPONAME:latest
+docker push $DOCKER_USERNAME/$REPO_NAME:latest
