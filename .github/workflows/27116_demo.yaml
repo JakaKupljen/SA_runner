@@ -16,10 +16,10 @@ jobs:
       
       - name: Build and Push Docker Image
         run: |
-          chmod +x zapakiraj_27111.sh
+          chmod +x zapakiraj_27116.sh
           ./zapakiraj_27116.sh
 
       - name: Run Docker Container
         run: |
-          chmod +x zapakiraj_27111.sh
+          chmod +x zapakiraj_27116.sh
           ./zazeni_27116.sh
