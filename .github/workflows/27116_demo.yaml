@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["Testiranje"] 
     types:
-      completed
+      - completed
 
 jobs:
   deploy:
