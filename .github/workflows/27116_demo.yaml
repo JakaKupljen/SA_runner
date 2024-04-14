@@ -1,42 +1,21 @@
-name: Github Actions Deploy Demo-
+name: Deploy
 
-
-env:
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  REPONAME: ${{ secrets.REPO_NAME }}
 on:
-  workflow_run:
-    workflows: ["Testiranje"]
+  push:
     branches:
-        - main
-    types:
-      - completed
+      - main
 
 jobs:
   deploy:
     runs-on: self-hosted
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && success() }}
+
     steps:
-      - name: Checkout repozitorija
+      - name: Checkout Repository
         uses: actions/checkout@v2
       
-      - name: Prijava v Docker
-        run: |
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: Build and Push Docker Image
+        run: ./zapakiraj_27116.sh
 
-      - name: Trenutni čas
-        id: datum
-        #run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
-        run: echo "date=$(date +'%Y-%m-%d--%M-%S')" >> "$GITHUB_ENV"
-      
-      - name: Zgradi docker sliko
-        run: |
-          echo ${{ steps.datum.outputs.date }}
-          echo "docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME:$date"
-          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME:$date
-
-      - name: Potisni docker sliko
-        run: |
-          docker push $DOCKER_USERNAME/$REPONAME:$date
-
+      - name: Run Docker Container
+        run: ./zazeni_27116.sh
