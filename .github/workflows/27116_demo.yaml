@@ -17,16 +17,26 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       
+      - name: Generate Tag
+        id: generate_tag
+        run: echo "::set-output name=tag::$(date +'%Y-%m-%d--%H-%M')"
+
       - name: Build and Push Docker Image
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           REPO_NAME: ${{ secrets.REPO_NAME }}
+          TAG: ${{ steps.generate_tag.outputs.tag }}
         run: |
           chmod +x zapakiraj_27116.sh
-          ./zapakiraj_27116.sh $DOCKER_USERNAME $DOCKER_PASSWORD $REPO_NAME
+          ./zapakiraj_27116.sh $DOCKER_USERNAME $DOCKER_PASSWORD $REPO_NAME $TAG
 
       - name: Run Docker Container
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          REPO_NAME: ${{ secrets.REPO_NAME }}
+          TAG: ${{ steps.generate_tag.outputs.tag }}
         run: |
           chmod +x zazeni_27116.sh
-          ./zazeni_27116.sh
+          ./zazeni_27116.sh $DOCKER_USERNAME $DOCKER_PASSWORD $REPO_NAME $TAG
